@@ -1,0 +1,28 @@
+{
+    "clients": [
+        {
+          "id": "1",
+          "name": "NLB"
+        },
+        {
+          "id": "2",
+          "name": "Vanguard"
+        },
+        {
+          "id": "3",
+          "name": "Pyramid"
+        },
+        {
+          "id": "4",
+          "name": "Talent Path"
+        },
+        {
+          "id": "5",
+          "name": "Tredence"
+        },
+        {
+          "id": "6",
+          "name": "Other resources"
+        }
+      ]
+}

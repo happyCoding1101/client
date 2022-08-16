@@ -1,38 +1,378 @@
-.App {
-  text-align: center;
+.pageContainer {
+  min-height: 80vh;
 }
 
-.App-logo {
-  height: 40vmin;
+.footer {
+  color: rgb(217, 217, 217);
+  background-color: #202325;
+  font-size: 12px;
+  margin: 0;
+}
+
+.btn-theme {
+  background-color: #0a295c;
+  color: white;
+}
+.btn-theme:hover {
+  background-color: white;
+  border: solid 1px #04193b;
+  color: #04193b;
+}
+
+.btn-sm {
+  font-size: 12px;
+}
+
+.btn-add-option {
+  width: 50px;
+}
+
+/* loan card */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 600px;
+  font-size: 12px;
+
+}
+.card:hover {
+  /* box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); */
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.card table tr{
+  margin: 0
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.logoContainer{
+  margin: auto;
+}
+
+.logoContainer .logo {
+  width: 100%;
+  max-width: 100px;
+  height: auto;
+}
+
+.approved {
+  background-color: lightgreen;
+}
+
+.rejected {
+  background-color: #913636;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.pending {
+  border: 1px black dashed;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* -- application card: */
+.vertically-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-table {
+  margin: 0;
+  padding: 0;
+  /* border: solid green 4px; */
+}
+
+.card-table tr{
+  border-bottom: solid grey 1px;
+  margin:0;
+  padding: 0;
+}
+
+.flexbox {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.btn-card {
+  font-size: 14px;
+  padding: 2px 4px;
+}
+
+.greenButton {
+  background-color: forestgreen;
+  color: white;
+}
+
+.redButton {
+  background-color: darkred;
+  color: white;
+}
+
+
+/* ------------ Form style */
+.formContainer {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+#loginForm {
+  width: 80%;
+  max-width: 500px;
+  height: 80vh;
+  padding-top: 10vh;
+
+}
+
+#registerContainer {
+  min-height: 70vh;
+  padding-top: 5%;
+}
+
+.formContainer section {
+  width: 90%;
+  max-width: 400px;
+}
+
+.w3-card-4 {
+  max-width: 700px;;
+}
+
+.edit-form label{
+  font-weight: 600;
+  
+}
+
+.nested-form {
+  padding-bottom: 10px;
+  width: 70%;
+  border: solid 1px darkblue;
+  min-width: 400px;
+
+}
+
+.year-input{
+  width: 80px;
+  margin: 0 5px;
+}
+
+
+.nested-form label{
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0;
+}
+
+
+.form-section {
+  flex-basis: 800px;
+  width: 100%;
+  max-width: 800px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  /* background-color: rgba(0,0,0,0.4); */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding-bottom: 1rem;
+}
+
+label {
+  margin-top: 2%;
+}
+
+/* a, a:visited {
+  color: #fff;
+} */
+
+input[type="text"],
+input[type="password"],
+button,
+textarea {
+/* font-family: 'Nunito', sans-serif; */
+font-size: 14px;
+padding: 0.25rem;
+border-radius: 0.2rem;
+}
+
+/* label,
+button {
+  margin-top: 1rem;
+}
+
+button {
+  padding: 0.5rem;
+} */
+
+.instructions {
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+    background: rgb(184, 86, 86);
+    color: #fff;
+    padding: 0.25rem;
+    position: relative;
+    bottom: -10px;
+}
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+
+.line {
+  display: inline-block;
+}
+
+
+input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-clear-button {
+  color: #fff;
+  position: relative;
+}
+
+input[type="date"]::-webkit-datetime-edit-year-field{
+  position: absolute !important;
+  border-left:1px solid #8c8c8c;
+  padding: 2px;
+  color:#000;
+  left: 65px;
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field{
+  position: absolute !important;
+  
+  padding: 2px;
+  color:#000;
+  left: 4px;
+}
+
+
+input[type="date"]::-webkit-datetime-edit-day-field{
+  position: absolute !important;
+  border-left:1px solid #8c8c8c;
+  color:#000;
+  padding: 2px;
+  left: 34px;
+  
+}
+
+
+/* ------ Home page */
+.home{
+  height: 80vh;
+  width: 100%;
+  background-position:center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+}
+
+
+.layer1 {
+  background-color: rgba(255,255,255,.2);
+  position: absolute;
+  top: 15%;
+  right: 0;
+  width: 50%;
+  height: 70%;
+}
+
+.layer-text {
+  position: absolute;
+  top: 20%;
+  left: 55%;
+}
+
+.image-1 {
+  background-image: url("/src/assets/background.jpg");
+}
+
+@media screen and (max-width: 768px) {
+  section{
+    min-height:70vh;
+    width: 90%;
+    max-width: 400px;
+    background-position:left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    margin: 0 auto;
   }
-  to {
-    transform: rotate(360deg);
+
+  .layer1 {
+    background-color: rgba(255,255,255,.5);
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
   }
+
+  .layer-text {
+    position: absolute;
+    top: 20%;
+    left: 5%;
+  }
+}
+
+
+/* list table */
+.listTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.listTable td, .listTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.listTable tr:nth-child(even){background-color: #f2f2f2;}
+
+.listTable tr:hover {background-color: #ddd;}
+
+.listTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #0a295c;
+  color: white;
 }
