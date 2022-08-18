@@ -58,6 +58,7 @@ function TrainingDetails() {
 
     
     const handleDetails = (id) => {
+        console.log('!!!!!^^^^^^^^^^^^!!!!!!!!!!!');
         console.log(id);
         redirecteTo(`../../talents/details/${id}`);
     }
@@ -103,7 +104,7 @@ function TrainingDetails() {
                     {
                     training?
                     <>
-                    <Paginated columns={COLUMNS} data={training.participants} id="clientsTable" clickFunc={handleDetails} />
+                    <Paginated columns={COLUMNS} data={training.participants} id="participantsTable" clickFunc={handleDetails} />
                     </> :<></>
                     // .participants?.map( (e, i) => 
                             

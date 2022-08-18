@@ -12,6 +12,7 @@ import Home from './feature/shared/Home';
 import UserContext from './feature/shared/user-context';
 import TalentsHome from './feature/talents/TalentsHome';
 import TrainingsHome from './feature/trainings/TrainingsHome';
+import Protected from './components/Protected';
 
 
 // export const UserContext = createContext();
@@ -21,21 +22,39 @@ export const DataContext = createContext();
 const TALENT_URL = ''
 
 function App() {
-  const [roles, setRoles] = useState("en");
+  const [roles, setRoles] = useState();
   const value = { roles, setRoles };
 
-  const [user, setUser] = useState(sessionStorage.getItem('user'));
-  // const [role, setRole] = useState(sessionStorage.getItem('role'));
+  // const [user, setUser] = useState(sessionStorage.getItem('user'));
+
+  const [role, setRole] = useState(0);
 
   const [talents, setTalents] = useState()
   const [trainings, setTrainings] = useState()
   const [refresh, setRefresh] = useState(false);
+  
 
 
 
   useEffect(() => {  
     getTalents();
     getTrainings();
+
+    // "Admin": 5150,
+    // "Editor": 1984,
+    // "User": 2001
+
+    // if(localStorage.getItem('roles')){
+    //   const role_code = localStorage.getItem('roles');
+    //   if (role_code.indexOf('5150') != -1) { setRole = 3}
+    //   else if (role_code.indexOf('1984') != -1) { setRole = 2}
+    //   else if (role_code.indexOf('2001') != -1) { setRole = 1 }
+    //   else setRole = 0
+
+    // }
+
+
+  
 
   },[]);
 
@@ -66,43 +85,47 @@ const getTrainings = async () => {
   }
 };
 
+// const isAuth = (accessLevel) => {
+//   return role >= accessLevel?
+// }
 
-  const getTalentss = (()=> {
-
-    // axiosTalents.get(TALENT_URL, { headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`} }).then((res) => {
-    //   console.log('inside home axios get talents')
-    //   console.log(res.data)
-    //   setTalents(res.data);
-    // })
-    // .catch ((err) =>{
-    //     console.log(err);
-    // }); 
-
-    axiosTrainings.get('', { headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`} }).then((res) => {
-      console.log('inside home axios get trainings')
-      console.log(res.data)
-      setTrainings(res.data);
-    })
-    .catch ((err) =>{
-        console.log(err);
-    }); 
-  })
 
   return (
-    <DataContext.Provider value={{user: [user, setUser], talents: [talents, setTalents], trainings: [trainings, setTrainings], roles:[roles, setRoles], refresh: [refresh, setRefresh]}}>
+    <DataContext.Provider value={{talents: [talents, setTalents], trainings: [trainings, setTrainings], role:[role, setRole], roles:[roles, setRoles],refresh: [refresh, setRefresh]}}>
     {/* <UserContext.Provider value={value} > */}
       <Navbar />
       <Routes>
           <Route path="/" element={<Home />} />
-          <Route path='talents/*' element={<TalentsHome />} />
-          <Route path='trainings/*' element={<TrainingsHome />} />
+
+          {/* <Route path='talents/*' element={
+            <Protected isAuth={role >= 2}>
+              <TalentsHome />
+            </Protected>
+          } />
+          <Route path='trainings/*' element={
+            <Protected isAuth={role >= 2}>
+              <TrainingsHome />
+            </Protected>
+          } /> */}
+
+          <Route path='talents/*' element={
+          
+              <TalentsHome />
+
+          } />
+          <Route path='trainings/*' element={
+
+              <TrainingsHome />
+
+          } />
+
           <Route path='login' element= {<Login />}  />
-          {/* <Route path='register' element={id? <Navigate replace to='/Dashboard/*' /> : <Register />} />
-          <Route path='Dashboard/*' element={role === 'customer'? <UserDashboard />
+          {/* <Route path='register' element={id? <Navigate replace to='/Dashboard/*' /> : <Register />} /> */}
+          {/* <Route path='Dashboard/*' element={role >=3? <UserDashboard />
                                             :role == 'admin'? <AdminDashboard />
                                             : <Navigate replace to="/login" />
-                                            } /> */}
-            
+                                            } />
+             */}
 
       </Routes>
     {/* </DataContext.Provider> */}

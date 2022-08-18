@@ -2,13 +2,13 @@ import React, { useState, useContext, useCallback } from 'react';
 import axios from '../../api/axiosBase';
 import { Link, useNavigate } from 'react-router-dom';
 import { DataContext } from '../../App';
-// import DataContext from '../shared/data-context';
+import UserContext from '../shared/user-context';
 
 const AUTH_URL = '/auth';
 function Login() {
-    // const { roles, setRoles} = useContext(UserContext);
-    const {user, roles} = useContext(DataContext);
-    const [userRole, setRoles] = roles;
+    const { roles, setRoles} = useContext(UserContext);
+    const {user, role} = useContext(DataContext);
+    const [roleVal, setRoleVal] = role;
 
     const [data, setData] = useState({ user: "", pwd: "" });
 	const [errMsg, setError] = useState("");
@@ -32,7 +32,7 @@ function Login() {
             // localStorage.setItem("user", res.username)
 			localStorage.setItem("token", res.accessToken); 
             localStorage.setItem("roles", res.roles);
-            setRoles(res.roles);
+            setRoleVal(res.roles);
             redirecteTo('/');
 		} catch (error) {
 			if ( error.response.status == 401 ) {

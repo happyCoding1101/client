@@ -8,9 +8,9 @@ import { useNavigate} from 'react-router-dom';
 
 const LOGOUT_URL = '/logout';
 function Navbar() {
-    const {roles} = useContext(DataContext);
-    const [userRole, setRoles] = roles;
-    // const {roles, setRoles} = useContext(DataContext);
+    const {role} = useContext(DataContext);
+    const [userRole, setRole] = role;
+    const {roles, setRoles} = useContext(DataContext);
     // const {user, role} = useContext(DataContext);
     // const [idVal, setIdVal] = id;
     // const [userVal, setUserVal] = user;
@@ -40,7 +40,7 @@ function Navbar() {
 
         console.log("signing out ...")
         axios.get(LOGOUT_URL);
-        setRoles();
+        setRole(0);
         localStorage.clear();
         redirecteTo('/login');
 
@@ -62,6 +62,7 @@ function Navbar() {
         
         {
                 localStorage.getItem('roles') && (localStorage.getItem('roles').indexOf('5150') != -1 || localStorage.getItem('roles').indexOf('1984') != -1)?
+                // role >= 2?
                 <>
                     <Link to='/talents' className='btn' >Talents Portal</Link>
                     <Link to='/trainings' className='btn' >Trainings Portal</Link>
@@ -72,13 +73,14 @@ function Navbar() {
                     <button className='btn' onClick={handleSignOut} >Sign Out</button>
 
                 </>  
-                :  localStorage.getItem('roles') && localStorage.getItem('roles').indexOf('5150') != -1?
-                <>
-                {/* <Link to='/talents' className='btn' >Talents Portal</Link>
-                <Link to='/trainings' className='btn' >Trainings Portal</Link> */}
-                <button className='btn' onClick={handleSignOut} >Sign Out</button>
-                </>
-                : localStorage.getItem('roles')?        
+                // :  localStorage.getItem('roles') && localStorage.getItem('roles').indexOf('5150') != -1?
+                // <>
+                // {/* <Link to='/talents' className='btn' >Talents Portal</Link>
+                // <Link to='/trainings' className='btn' >Trainings Portal</Link> */}
+                // <button className='btn' onClick={handleSignOut} >Sign Out</button>
+                // </>
+                : localStorage.getItem('roles')?   
+                // : role >= 1?     
                 <>
 
                     <Link to='/' className='btn'>Home</Link>

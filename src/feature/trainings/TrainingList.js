@@ -8,6 +8,7 @@ import { BasicTable } from '../../components/BasicTable';
 import SearchBar from '../../components/SearchBar';
 import { Paginated } from '../../components/PaginatedTable';
 import { Link, useNavigate } from 'react-router-dom';
+import axiosTrainings from '../../api/axiosTrainings';
 
 
 const COLUMNS = [
@@ -54,8 +55,9 @@ const COLUMNS = [
 const CLIENTS = ["Vanguard", "NLB", "Training Path", "Tredence", "Pyramid"]
 const YEARS = [0, 1, 2, 3, 5]
 function TrainingList() {
-    const {trainings} = useContext(DataContext);
-    const [trainingList, setTrainingList] = trainings;
+    // const {trainings} = useContext(DataContext);
+    // const [trainingList, setTrainingList] = trainings;
+    const [trainingList, setTrainingList] = useState();
     const [filteredTrainings, setFilteredTrainings] = useState();
     const [showTrainings, setShowTrainings] = useState();
     const [client, setClient] = useState([]);
@@ -66,19 +68,31 @@ function TrainingList() {
     const redirecteTo= useCallback((destination) => navigate(destination, {replace: true}), [navigate]);
 
     useEffect(() => {
-        console.log(trainingList);
+        getTrainings();
+        // console.log(trainingList);
         setFilteredTrainings(trainingList);
         setShowTrainings(trainingList);
     }, [trainingList])
 
 
+    const getTrainings = async () => {
+        try {
+            const resp = await axiosTrainings.get('', { headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`} });
+            // console.log(resp.data);
+            const list = resp.data.sort((a, b) => a.id > b.id)
+            setTrainingList(list);
+        } catch (err) {
+            // Handle Error Here
+            console.error(err);
+        }
+    };
 
     const onSearchSubmit = term => {
         console.log('--------------')
         console.log('New Search submit', term.toLowerCase()); 
 
         let filter = term.toLowerCase();
-        var rows = document.querySelector("#clientsTable tbody").rows;
+        var rows = document.querySelector("#trainingsTable tbody").rows;
 
         for (var i = 0; i < rows.length; i++) {
             var Col_2 = rows[i].cells[1].textContent.toLowerCase();
@@ -106,7 +120,9 @@ function TrainingList() {
     }
 
     const handleDetails = (id) => {
+        
         console.log(id);
+
         redirecteTo(`details/${id}`);
     }
 
@@ -203,7 +219,7 @@ function TrainingList() {
                 { showTrainings?
                     <div className="App">
                    
-                    <Paginated columns={COLUMNS} data={showTrainings} id="clientsTable" clickFunc={handleDetails} />
+                    <Paginated columns={COLUMNS} data={showTrainings} id="trainingsTable" clickFunc={handleDetails} />
                     {/* <BasicTable columns={COLUMNS} data={trainingList} /> */}
                     </div>
                     :

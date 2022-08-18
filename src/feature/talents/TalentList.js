@@ -69,7 +69,7 @@ function TalentList() {
     const redirecteTo= useCallback((destination) => navigate(destination, {replace: true}), [navigate]);
 
     useEffect(() => {
-        console.log(talentList);
+        // console.log(talentList);
         getTalents();
         setFilteredTalents(talentList);
         setShowTalents(talentList);
@@ -78,7 +78,7 @@ function TalentList() {
     const getTalents = async () => {
         try {
             const resp = await axiosTalents.get('', { headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`} });
-            console.log(resp.data);
+            // console.log(resp.data);
             setTalentList(resp.data);
             setTalentNum(resp.data.length);
         } catch (err) {
@@ -92,7 +92,7 @@ function TalentList() {
         console.log('New Search submit', term.toLowerCase()); 
 
         let filter = term.toLowerCase();
-        var rows = document.querySelector("#clientsTable tbody").rows;
+        var rows = document.querySelector("#talentsTable tbody").rows;
 
         for (var i = 0; i < rows.length; i++) {
             var Col_2 = rows[i].cells[1].textContent.toLowerCase();
@@ -254,7 +254,7 @@ function TalentList() {
                 { showTalents?
                     <div className="App">
                    
-                    <Paginated columns={COLUMNS} data={showTalents} id="clientsTable" clickFunc={handleDetails} />
+                    <Paginated columns={COLUMNS} data={showTalents} id="talentsTable" clickFunc={handleDetails} />
                     {/* <BasicTable columns={COLUMNS} data={talentList} /> */}
                     </div>
                     :
